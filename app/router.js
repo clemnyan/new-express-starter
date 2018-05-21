@@ -13,7 +13,8 @@ router.post('/signin', requireSignin, User.signin);
 router.post('/signup', User.signup);
 router.get('/users', requireAuth, User.getUser);
 
+
 router.route('/users/:id')
-  .put(requireAuth, User.updateUser);
+  .put(User.updateUser);
 
 export default router;

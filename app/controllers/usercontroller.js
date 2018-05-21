@@ -31,16 +31,16 @@ export const signin = (req, res, next) => {
 };
 
 export const signup = (req, res, next) => {
-  const { username, password } = req.body;
-  if (!password || !username) {
+  const { email, username, password } = req.body;
+  if (!email || !password || !username) {
     return res.status(422).send('You must provide email, fullname, username, and password');
   }
-  User.findOne({ username })
+  User.findOne({ email })
     .then((user) => {
       if (user) {
         return res.status(409).send('User for this email already exists');
       }
-      const newUser = new User({ username, password });
+      const newUser = new User({ email, username, password });
       return newUser.save();
     })
     .then((newUser) => {
